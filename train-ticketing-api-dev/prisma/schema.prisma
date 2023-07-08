@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  userId    Int    @id @default(autoincrement())
+  full_name String @db.VarChar(100)
+  email     String @unique @db.VarChar(100)
+  mobile    String @unique @db.VarChar(14)
+  password  String @db.VarChar(100)
+  address   String @db.VarChar(250)
+  role      ROLE   @default(USER)
+
+  createdAt DateTime @default(now()) @db.DateTime(0)
+  updatedAt DateTime @updatedAt @db.DateTime(0)
+
+  purchaseHistory purchaseHistory[]
+  post            post[]
+}
+
+model purchaseHistory {
+  purchaseHistoryId Int @id @default(autoincrement())
+
+  journeyDate DateTime        @db.Date
+  status      PURCHASE_STATUS @default(PAYMENT_PENDING)
+
+  userId Int
+  user   user @relation(fields: [userId], references: [userId])
+
+  seatId Int
+  seat   seat @relation(fields: [seatId], references: [seatId])
+
+  @@unique(fields: [journeyDate, seatId])
+  @@index([journeyDate])
+}
+
+model train {
+  trainId Int    @id @default(autoincrement())
+  name    String @db.VarChar(100)
+
+  trainLocationId Int?
+  trainLocation   trainLocation? @relation(fields: [trainLocationId], references: [trainLocationId])
+
+  trainClass trainClass[]
+  trainRoute trainRoute[]
+}
+
+model trainLocation {
+  trainLocationId Int @id @default(autoincrement())
+
+  lat  String
+  long String
+
+  train train[]
+}
+
+model trainRoute {
+  trainRouteId Int @id @default(autoincrement())
+
+  from      String @db.Char(20)
+  to        String @db.Char(20)
+  departure String @db.Char(10)
+  arrival   String @db.Char(10)
+  fare      Json
+
+  trainId Int
+  train   train @relation(fields: [trainId], references: [trainId])
+
+  @@index(fields: [from, to])
+}
+
+model trainClass {
+  trainClassId Int @id @default(autoincrement())
+
+  className TRAIN_CLASS
+
+  trainId Int
+  train   train @relation(fields: [trainId], references: [trainId])
+
+  seat seat[]
+}
+
+model seat {
+  seatId Int @id @default(autoincrement())
+
+  seatCode String @db.VarChar(30)
+
+  trainClassId Int
+  trainClass   trainClass @relation(fields: [trainClassId], references: [trainClassId])
+
+  purchaseHistory purchaseHistory[]
+}
+
+model notice {
+  noticeId Int @id @default(autoincrement())
+
+  title   String
+  message String @db.Text
+
+  createdAt DateTime @default(now()) @db.DateTime(0)
+}
+
+model post {
+  postId Int @id @default(autoincrement())
+
+  body String @db.Text
+
+  userId Int
+  user   user @relation(fields: [userId], references: [userId])
+
+  createdAt DateTime @default(now()) @db.DateTime(0)
+}
+
+enum TRAIN_CLASS {
+  SHOVON
+  S_CHAIR
+  SNIGDHA
+  AC_S
+}
+
+enum PURCHASE_STATUS {
+  PAID
+  REFUNDED
+  PAYMENT_PENDING
+  CANCELLED
+}
+
+enum ROLE {
+  USER
+  ADMIN
+}

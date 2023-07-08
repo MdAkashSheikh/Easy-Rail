@@ -1,0 +1,19 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 130,
+    "files.trimTrailingWhitespace": true,
+    "javascript.suggest.autoImports": false,
+    "eslint.enable": true,
+    "eslint.validate": ["javascript"],
+    "eslint.packageManager": "pnpm",
+    "debug.inlineValues": "on",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[prisma]": {
+        "editor.defaultFormatter": "Prisma.prisma"
+    }
+}

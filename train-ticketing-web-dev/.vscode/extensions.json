@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "formulahendry.auto-rename-tag",
+        "mikestead.dotenv",
+        "ms-azuretools.vscode-docker",
+        "prisma.prisma",
+        "Zignd.html-css-class-completion"
+    ]
+}

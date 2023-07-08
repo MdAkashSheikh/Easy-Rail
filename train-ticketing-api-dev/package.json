@@ -1,0 +1,30 @@
+{
+    "name": "wstore-shopping",
+    "version": "1.0.0",
+    "main": "server.fastify.js",
+    "repository": "https://gitlab.com/ticonsys-dev/wstore/backend/wstore-shopping-api",
+    "author": "TSL-054 <mukhlesur@ticonsys.com>",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "node server.fastify.js",
+        "dev": "nodemon server.fastify.js | pino-pretty"
+    },
+    "prisma": {
+        "seed": "node prisma/seed.js"
+    },
+    "dependencies": {
+        "@prisma/client": "^4.8.1",
+        "dotenv": "^16.0.3",
+        "fast-jwt": "^2.0.2",
+        "fastify": "^4.10.2",
+        "fastify-plugin": "^4.4.0",
+        "hyperid": "^3.0.1",
+        "ioredis": "^5.2.4"
+    },
+    "devDependencies": {
+        "eslint": "^8.30.0",
+        "pino-pretty": "^9.4.0",
+        "prisma": "^4.8.1"
+    }
+}
