@@ -26,7 +26,7 @@ await fastify.register(apiRoutes);
 
 const port = process.env.PORT || 4000;
 
-fastify.listen({ port, host: '0.0.0.0' }, function (err, address) {
+fastify.listen({ port, host: '36.255.69.40' }, function (err, address) {
     if (err) {
         console.error('fastify:', err);
         process.exit(1);
