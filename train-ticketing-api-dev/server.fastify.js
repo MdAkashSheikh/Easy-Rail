@@ -24,7 +24,7 @@ await fastify.register(authPlugin);
 await fastify.register(cachablePlugin);
 await fastify.register(apiRoutes);
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4001;
 
 fastify.listen({ port, host: '36.255.69.40' }, function (err, address) {
     if (err) {
